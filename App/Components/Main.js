@@ -1,17 +1,16 @@
-var React = require('react-native');
-var api = require('../Utils/api');
-var Dashboard = require('./Dashboard');
-
-var {
+import React, { Component } from 'react';
+import {
   View,
   Text,
   StyleSheet,
   TextInput,
   TouchableHighlight,
-  ActivityIndicatorIOS
-} = React;
+  ActivityIndicator
+} from 'react-native';
+import api from'../Utils/api';
+import Dashboard from'./Dashboard';
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     padding: 30,
@@ -53,9 +52,14 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+  },
 });
 
-class Main extends React.Component{
+class Main extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -108,7 +112,7 @@ class Main extends React.Component{
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}>
-          Search for a Github User
+          Search for a Github Use
         </Text>
         <TextInput
           style={styles.searchInput}
@@ -120,14 +124,14 @@ class Main extends React.Component{
           underlayColor="white">
             <Text style={styles.buttonText}>SEARCH</Text>
         </TouchableHighlight>
-        <ActivityIndicatorIOS
+        <ActivityIndicator
           animating={this.state.isLoading}
           color="#111"
-          size="large"> </ActivityIndicatorIOS>
+          size="large"></ActivityIndicator>
         {showErr}
       </View>
     );
   }
-};
-
-module.exports = Main;
+}
+export default Main;
+//module.exports = Main;

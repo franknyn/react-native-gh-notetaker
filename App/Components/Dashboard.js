@@ -1,19 +1,18 @@
-var React = require('react-native');
-var Profile = require('./Profile');
-var api = require('../Utils/api');
-var Repositories = require('./Repositories');
-var Notes = require('./Notes');
-
-var {
+import React, { Component } from 'react';
+import {
   Text,
   View,
   NavigatorIOS,
   Image,
   StyleSheet,
   TouchableHighlight
-} = React;
+} from 'react-native';
+import Profile from './Profile';
+import api from '../Utils/api';
+import Repositories from './Repositories';
+import Notes from './Notes';
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     marginTop: 65,
     flex: 1
@@ -28,7 +27,7 @@ var styles = StyleSheet.create({
   }
 });
 
-class Dashboard extends React.Component{
+class Dashboard extends Component{
   makeBackground(btn){
     var obj = {
       flexDirection: 'row',
@@ -65,10 +64,9 @@ class Dashboard extends React.Component{
         });
       })
   }
-  goToNotes(){
-    api.getNotes(this.props.userInfo.login)
-      .then((jsonRes) => {
-        jsonRes = jsonRes || {};
+  goToNotes() {
+    api.getNotes(this.props.userInfo.login).once("value").then( (snapshot) => {
+        let jsonRes = snapshot.val() || {};
         this.props.navigator.push({
           component: Notes,
           title: 'Notes',
@@ -77,7 +75,9 @@ class Dashboard extends React.Component{
             userInfo: this.props.userInfo
           }
         });
-      });
+
+    });
+
   }
   render(){
     return (
@@ -104,10 +104,11 @@ class Dashboard extends React.Component{
       </View>
     )
   }
-};
+}
 
 Dashboard.propTypes = {
   userInfo: React.PropTypes.object.isRequired
 }
 
-module.exports = Dashboard;
+export default Dashboard;
+//module.exports = Dashboard;

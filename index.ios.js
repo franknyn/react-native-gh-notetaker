@@ -1,16 +1,14 @@
-var React = require('react-native');
-var Main = require('./App/Components/Main');
-
-window.React = React;
-
-var {
+import React, { Component } from 'react';
+import {
   AppRegistry,
   StyleSheet,
-  NavigatorIOS,
-} = React;
+  NavigatorIOS
+} from 'react-native';
+import Main from './App/Components/Main';
 
-var NoteTaker = React.createClass({
-  render: function() {
+
+class  NoteTaker extends Component{
+  render() {
     return (
       <NavigatorIOS
         style={styles.container}
@@ -20,9 +18,9 @@ var NoteTaker = React.createClass({
         }}/>
     );
   }
-});
+};
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#111111'

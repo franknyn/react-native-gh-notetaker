@@ -1,4 +1,4 @@
-var React = require('react-native');
+/*var React = require('react-native');
 var Badge = require('./Badge');
 var Separator = require('./Helpers/Separator');
 
@@ -8,8 +8,19 @@ var {
   StyleSheet,
   ScrollView
 } = React;
+*/
+import React, { Component } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView
+} from 'react-native';
 
-var styles = StyleSheet.create({
+import Badge from './Badge';
+import Separator from './Helpers/Separator';
+
+const  styles = StyleSheet.create({
   container: {
     flex: 1
   },
@@ -30,7 +41,7 @@ var styles = StyleSheet.create({
   }
 });
 
-class Profile extends React.Component{
+class Profile extends Component {
   getRowTitle(user, item){
     item = (item === 'public_repos') ? item.replace('_', ' ') : item;
     return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
@@ -60,10 +71,11 @@ class Profile extends React.Component{
       </ScrollView>
     )
   }
-};
+}
 
 Profile.propTypes = {
   userInfo: React.PropTypes.object.isRequired
 }
 
-module.exports = Profile;
+export default Profile;
+//module.exports = Profile;

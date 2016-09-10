@@ -1,18 +1,18 @@
-var React = require('react-native');
-var api = require('../Utils/api');
-var Separator = require('./Helpers/Separator');
-var Badge = require('./Badge');
-
-var {
+import React, { Component } from 'react';
+import {
   View,
   Text,
   ListView,
   TextInput,
   StyleSheet,
   TouchableHighlight
-} = React;
+} from 'react-native';
 
-var styles = StyleSheet.create({
+import api from '../Utils/api';
+import Separator from './Helpers/Separator';
+import Badge from './Badge';
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -45,7 +45,7 @@ var styles = StyleSheet.create({
   }
 });
 
-class Notes extends React.Component{
+class Notes extends Component {
   constructor(props){
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
@@ -67,15 +67,15 @@ class Notes extends React.Component{
     });
     api.addNote(this.props.userInfo.login, note)
       .then((data) => {
-        api.getNotes(this.props.userInfo.login)
-          .then((data) => {
+        api.getNotes(this.props.userInfo.login).once("value").then( (snapshot) => {
+            let jsonRes = snapshot.val() || {};
             this.setState({
-              dataSource: this.ds.cloneWithRows(data)
-            })
-          });
+              dataSource: this.ds.cloneWithRows(jsonRes)
+            });
+        });
       })
       .catch((error) => {
-        console.log('Request failed', error);
+        console.log('Request failed  ---', error);
         this.setState({error})
       });
   }
@@ -112,16 +112,18 @@ class Notes extends React.Component{
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this.renderRow}
-            renderHeader={() => <Badge userInfo={this.props.userInfo}/>} />
+            renderHeader={() => <Badge userInfo={this.props.userInfo}/>}
+            enableEmptySections={true} />
         {this.footer()}
       </View>
     )
   }
-};
+}
 
 Notes.propTypes = {
   userInfo: React.PropTypes.object.isRequired,
   notes: React.PropTypes.object.isRequired
 }
 
-module.exports = Notes;
+export default Notes;
+//module.exports = Notes;

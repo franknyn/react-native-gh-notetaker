@@ -1,12 +1,19 @@
-var React = require('react-native');
+/*var React = require('react-native');
 
 var {
   View,
   WebView,
   StyleSheet
 } = React;
+*/
+import React, { Component } from 'react';
+import {
+  View,
+  WebView,
+  StyleSheet
+} from 'react-native';
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F6F6EF',
@@ -14,18 +21,18 @@ var styles = StyleSheet.create({
   },
 });
 
-class Web extends React.Component{
+class Web extends Component{
   render() {
     return (
       <View style={styles.container}>
-        <WebView url={this.props.url}/>
+        <WebView source={{uri: this.props.url}} />
       </View>
     );
   }
-};
+}
 
 Web.propTypes = {
  url: React.PropTypes.string.isRequired
 };
-
-module.exports = Web;
+export default Web;
+//module.exports = Web;

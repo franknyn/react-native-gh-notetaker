@@ -1,3 +1,4 @@
+/*
 var React = require('react-native');
 var Badge = require('./Badge');
 var Separator = require('./Helpers/Separator');
@@ -10,8 +11,20 @@ var {
   TouchableHighlight,
   StyleSheet
 } = React;
+*/
+import React, { Component } from 'react';
+import {
+  ScrollView,
+  Text,
+  View,
+  TouchableHighlight,
+  StyleSheet
+} from 'react-native';
+import Badge from './Badge';
+import Separator from './Helpers/Separator';
+import Web_View from './Helpers/WebView';
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -36,7 +49,7 @@ var styles = StyleSheet.create({
   }
 });
 
-class Repositories extends React.Component{
+class Repositories extends Component {
   openPage(url){
     this.props.navigator.push({
       title: 'Web View',
@@ -44,7 +57,7 @@ class Repositories extends React.Component{
       passProps: {url}
     });
   }
-  render(){
+  render() {
     var repos = this.props.repos;
     var list = repos.map((item, index) => {
       var desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View />;
@@ -70,11 +83,12 @@ class Repositories extends React.Component{
       </ScrollView>
     )
   }
-};
+}
 
 Repositories.propTypes = {
   userInfo: React.PropTypes.object.isRequired,
   repos: React.PropTypes.array.isRequired
 }
 
-module.exports = Repositories;
+export default Repositories;
+//module.exports = Repositories;
