@@ -4,6 +4,8 @@ Based on:
 * https://egghead.io/courses/react-native-fundamentals
 * https://github.com/tylermcginnis/react-native-gh-notetaker
 
+NavigatorIOS + Github API + Firebase
+
 ### Install:
 ```
 git clone git@github.com:franknyn/react-native-notetaker.git notetaker
