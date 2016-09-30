@@ -4,7 +4,10 @@ Based on:
 * https://egghead.io/courses/react-native-fundamentals
 * https://github.com/tylermcginnis/react-native-gh-notetaker
 
-NavigatorIOS + Github API + Firebase
+-NavigatorIOS
+-ListView
+-Github API
+-Firebase
 
 ### Install:
 ```
